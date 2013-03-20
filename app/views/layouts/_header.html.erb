@@ -10,7 +10,7 @@
 	    </a>
      
 	    <!-- Be sure to leave the brand out there if you want it shown -->
-	    <a class="brand" href="#">Find My Sub</a>
+	    <%= link_to "Find My Sub", root_path, class: "brand" %>
      
 	    <!-- Everything you want hidden at 940px or less, place within here -->
 	    <div class="nav-collapse collapse">
@@ -19,7 +19,12 @@
 					<li><%= link_to "About", about_path %></Li>
 				</ul>
 				<ul class="nav pull-right">
-			  	<li><%= link_to "Login", '#' %></Li>
+					<% if user_signed_in? %>
+						<li><%= link_to "Edit Profile", edit_user_registration_path %></Li>
+						<li><%= link_to "Logout", destroy_user_session_path, method: :delete %></Li>
+					<% else %>
+			  		<li><%= link_to "Login", new_user_session_path %></Li>
+	  			<% end %>
 				</ul>
 	    </div>
      
